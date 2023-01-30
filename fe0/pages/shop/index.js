@@ -2,29 +2,12 @@ import React, { Suspense, useEffect, useMemo, useState } from "react";
 import Head from "next/head";
 import dynamic from "next/dynamic";
 
-const FetchingDynamic = dynamic(
-  () => {
-    const mod = import("../component/ShopFetching").then((data) => {
-      return data;
-    });
-    return mod;
-  },
-  {
-    ssr: false,
-    loading: () => (
-      <div
-        style={{
-          position: "absolute",
-          top: "30%",
-          left: "50%",
-          transfor: "translate('-30%','50%')",
-        }}
-      >
-        "LOADING ..."
-      </div>
-    ),
-  }
-);
+const FetchingDynamic = dynamic(() => {
+  const mod = import("../component/ShopFetching").then((data) => {
+    return data;
+  });
+  return mod;
+});
 
 const Shop = (props) => {
   return (

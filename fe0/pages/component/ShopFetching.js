@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo } from "react";
 
-const ShopFetching = (props) => {
+const ShopFetching = () => {
   const [data, setData] = useState([]);
   const fetchingReq = async () => {
     const swapi = await fetch(
@@ -29,10 +29,4 @@ const ShopFetching = (props) => {
   return listVeiw;
 };
 
-ShopFetching.getInitialProps = async () => {
-  const swapi = await fetch("https://swapi.dev/api/people/1").then((res) =>
-    res.json()
-  );
-  return swapi;
-};
 export default ShopFetching;

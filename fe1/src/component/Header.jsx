@@ -26,6 +26,12 @@ const Header = (props) => {
       <span style={{ margin: "0 10px" }}>
         <Link href="/shop">shop</Link>
       </span>
+      <span style={{ margin: "0 10px" }}>
+        <Link href="/serverside-test">serverside-test</Link>
+      </span>
+      <span style={{ margin: "0 10px" }}>
+        <Link href="/static-test">static-test</Link>
+      </span>
     </div>
   );
 };

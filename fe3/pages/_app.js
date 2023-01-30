@@ -1,20 +1,15 @@
 import "../styles/globals.css";
-
-import dynamic from "next/dynamic";
+import App from "next/app";
 import { useRouter } from "next/router";
-const Header = dynamic(
-  () => {
-    const mod = import("fe1/header");
-    return mod;
-  },
-  { ssr: false }
-);
+import Header from "fe1/header";
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
   const pathname = router.pathname.split("/")[1];
-  console.log({ pathname });
-  const pageTitle = { "": "HomePage", shop: "ShopPage" };
+
+  const pageTitle = {
+    "": "",
+  };
 
   return (
     <>
@@ -24,4 +19,9 @@ function MyApp({ Component, pageProps }) {
   );
 }
 
+MyApp.getInitialProps = async (ctx) => {
+  console.log({ ctx });
+  const appProps = await App.getInitialProps(ctx);
+  return appProps;
+};
 export default MyApp;

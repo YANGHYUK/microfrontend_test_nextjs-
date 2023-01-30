@@ -1,9 +1,11 @@
 /** @type {import('next').NextConfig} */
-const { NextFederationPlugin } = require("@module-federation/nextjs-mf");
-const path = require("path");
+const NextFederationPlugin = require("@module-federation/nextjs-mf");
+
 const nextConfig = {
   reactStrictMode: true,
+
   webpack: (config, options) => {
+    console.log({ options }, "fe3");
     const { isServer } = options;
     Object.assign(config.experiments, { topLevelAwait: true });
     config.plugins.push(
@@ -22,9 +24,26 @@ const nextConfig = {
           }/remoteEntry.js`,
         },
         shared: {},
+        extraOptions: {
+          automaticAsyncBoundary: true,
+
+          exposePages: true, // `false` by default  exposes automatically all nextjs pages for you and theirs ./pages-map.
+          // enableImageLoaderFix: true, // `false` by default – adds public hostname to all assets bundled by nextjs-image-loader. So if you serve remoteEntry from http://example.com then all bundled assets will get this hostname in runtime. It's something like Base URL in HTML but for federated modules.
+          // enableUrlLoaderFix: true, // `false` by default - adds public hostname to all assets bundled by url-loader.
+          // automaticAsyncBoundary: true, // `false` by default - adds automatic async boundary for all federated modules. It's required for sync imports to work.
+          // skipSharingNextInternals: false // `false` by default - disables sharing of next internals. You can use it if you want to share next internals yourself or want to use this plugin on non next applications
+        },
       })
     );
     return config;
+  },
+  async rewrites() {
+    return [
+      // {
+      //   source: "/static-test",
+      //   destination: `/fe2@http://localhost:3002/_next/static/chunks/remoteEntry.js`,
+      // },
+    ];
   },
 };
 
