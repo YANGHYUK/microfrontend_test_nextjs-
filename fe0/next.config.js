@@ -15,16 +15,17 @@ const nextConfig = {
           // fe3: "fe3@http://localhost:3003/_next/static/chunks/remoteEntry.js",
         },
         exposes: {
-          "./shop": "./pages/shop",
           "./serverside-test": "./pages/serverside-test",
           "./static-test": "./pages/static-test",
         },
+
         shared: {},
       })
     );
 
     return config;
   },
+  basePath: "/shop",
 };
 
 module.exports = nextConfig;

@@ -1,11 +1,12 @@
 /** @type {import('next').NextConfig} */
+
+const { SHOP_URL } = process.env;
 const NextFederationPlugin = require("@module-federation/nextjs-mf");
 
 const nextConfig = {
   reactStrictMode: true,
 
   webpack: (config, options) => {
-    console.log({ options }, "fe3");
     const { isServer } = options;
     Object.assign(config.experiments, { topLevelAwait: true });
     config.plugins.push(
@@ -39,9 +40,21 @@ const nextConfig = {
   },
   async rewrites() {
     return [
+      {
+        source: "/:path*",
+        destination: `/:path*`,
+      },
+      {
+        source: "/shop",
+        destination: `${SHOP_URL}/shop`,
+      },
+      {
+        source: "/shop/:path*",
+        destination: `${SHOP_URL}/shop/:path*`,
+      },
       // {
-      //   source: "/static-test",
-      //   destination: `/fe2@http://localhost:3002/_next/static/chunks/remoteEntry.js`,
+      //   source: "/shop/:path*",
+      //   destination: `${SHOP_URL}/shop/item/:path*`,
       // },
     ];
   },
