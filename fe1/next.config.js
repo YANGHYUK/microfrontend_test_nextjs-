@@ -15,6 +15,7 @@ const nextConfig = {
         },
         exposes: {
           "./header": "./src/component/Header",
+          "./basicRoundButton": "./src/component/BasicRoundButton",
         },
         shared: {},
       })
