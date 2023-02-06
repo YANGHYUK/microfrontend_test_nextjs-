@@ -52,10 +52,6 @@ const nextConfig = {
         source: "/shop/:path*",
         destination: `${SHOP_URL}/shop/:path*`,
       },
-      // {
-      //   source: "/shop/:path*",
-      //   destination: `${SHOP_URL}/shop/item/:path*`,
-      // },
     ];
   },
 };
